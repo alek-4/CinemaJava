@@ -6,15 +6,16 @@ public class Peliculas {
     private Integer duracion;
     private Integer edad;
     private String director;
-
+    private Integer valor;
     public Peliculas() {
     }
 
-    public Peliculas(String titulo, Integer duracion, Integer edad, String director) {
+    public Peliculas(String titulo, Integer duracion, Integer edad, String director, Integer valor) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.edad = edad;
         this.director = director;
+        this.valor = valor;
     }
 
     public String getTitulo() {
@@ -47,6 +48,14 @@ public class Peliculas {
 
     public void setDirector(String director) {
         this.director = director;
+    }
+
+    public Integer getValor() {
+        return valor;
+    }
+
+    public void setValor(Integer valor) {
+        this.valor = valor;
     }
 
     @Override
