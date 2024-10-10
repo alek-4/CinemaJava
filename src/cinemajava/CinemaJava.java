@@ -15,13 +15,13 @@ public class CinemaJava {
 
 
         Matriz matriz = new Matriz();
-        boolean detener = true;
+
 
         mainloop:
-        while(detener) {
+        while(true) {
 
             for (int i = 0; i < matriz.getMatriz().length; i++) {
-                for (int j = 0; j < matriz.getMatriz().length; j++) {
+                for (int j = 0; j < matriz.getMatriz()[i].length; j++) {
 
                     System.out.println("Por favor ingrese su nombre:");
                     spectador.setNombre(sc.next());
@@ -30,9 +30,12 @@ public class CinemaJava {
                     System.out.println("Por favor ingrese la cantidad de dinero:");
                     spectador.setDinero(sc.nextInt());
 
+
                     boolean stop = true;
+
                     while(stop) {
-                        if (!matriz.getMatriz()[i][j].equals("0")){
+                        if (!matriz.getMtr()[i][j].equals("0 ")){
+
                      System.out.print("quieres asignar el puesto?  " + matriz.getMatriz()[i][j] + "\n");
                      System.out.println("1-SI" + "\n" + "2-NO");
                     int opc = sc.nextInt();
@@ -42,54 +45,41 @@ public class CinemaJava {
                                 System.out.println("Lo sentimos no cumples con la edad necesaria");
                             }
                             else {
-                                if(spectador.getDinero() < peliculas.getValor()) {
+                                if(spectador.getDinero() < peliculas.getValor() && spectador.getDinero() <= 0)  {
                                     System.out.println("No tienes el dinero necesario para la boleta");
                                 }
                                 else {
                                     spectador.setDinero(spectador.getDinero()-peliculas.getValor());
-                                    matriz.getMtr()[i][j] = "0";
+                                    matriz.getMtr()[i][j] = "0 ";
                                     System.out.println("Informacion del espectador" + "\n" + "Asiento Asignado: " + matriz.getMatriz()[i][j]);
                                     System.out.println(spectador.toString());
                                     System.out.println("Le gustaria ver los asientos asignados?" + "\n" + "1-SI" + "\n" + "2-NO");
                                     int ps = sc.nextInt();
                                     if (ps == 1) {
-                                        for (i = 0; i < matriz.getMatriz().length; i++) {
-                                            for (j = 0; j < matriz.getMatriz().length; j++) {
-                                                System.out.print(matriz.getMtr()[i][j] + " ");
-
-                                            }
-                                            System.out.println();
-                                        }
-                                        System.out.println();
+                                       mostrar(matriz);
                                     }
                                     System.out.println("\n" + "Le gustaria comprar otro boleto?" + "\n" + "1-SI" + "\n" + "2-NO");
                                     int opc2= sc.nextInt();
 
                                     if (opc2 != 1) {
+                                        System.out.println("Hasta la proxima " + spectador.getNombre());
                                         stop = false;
                                     }
+
+
+
+
                                     break;
 
 
                                 }
                             }
-                             detener = false;
+
                         break mainloop;
 
                         case 2:
-                            for (i = 0; i < matriz.getMatriz().length; i++) {
-                                for (j = 0; j < matriz.getMatriz().length; j++) {
 
-                                    System.out.print("quieres asignar este puesto?  " + matriz.getMatriz()[i][j] + "\n");
-                                    System.out.println("1-SI" + "\n" + "2-NO");
-                                    opc = sc.nextInt();
-                                    break;
-                                }
 
-                            }
-
-                            default:
-                                System.out.println("Opcion no valida");
 
                             break;
 
@@ -98,13 +88,23 @@ public class CinemaJava {
 
 
 
+
+
+
+
+
+                            default:
+                                System.out.println("Opcion no valida");
+
+                            break;
+
                       }
-                      i++;
-                    if (i <= matriz.getMatriz()[j].length) {
-                        j++;
-                        i = 0;
+                      j++;
+                    if (j >= matriz.getMatriz()[i].length) {
+                        i++;
+                        j = 0;
                     }
-                    if (j >= matriz.getMatriz().length) {
+                    if (i >= matriz.getMatriz().length) {
                         i = 0;
                         j = 0;
                     }
@@ -116,6 +116,17 @@ public class CinemaJava {
         }
 
 
+    }
+
+    private static void mostrar(Matriz matriz) {
+        for (int i = 0; i < matriz.getMtr().length; i++) {
+            for (int j = 0; j < matriz.getMtr()[i].length; j++) {
+                System.out.print(matriz.getMtr()[i][j] + " ");
+
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
 }
